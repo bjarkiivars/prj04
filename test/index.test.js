@@ -15,9 +15,20 @@ describe("Endpoint tests", () => {
   //Write your tests below here
   //###########################
 
-  // Do something weird
-  test("GET /randomURL causes 405", async () => {
-    const res = await request(apiUrl).get("/api/v1/randomUrl");
-    expect(res).toHaveProperty("statusCode", 405);
+  // GET request for all tunes
+  test("GET /tunes", async () => {
+    const res = await request(apiUrl).get("/api/v1/tunes");
+    expect(res).toHaveProperty("statusCode", 200);
+  });
+
+  // GET request for specific tune 
+  test("GET /genres/:genreId/tunes/:tuneId", async () => {
+    const res = await request(apiUrl)
+      .get("/api/v1/genres/:genreId/tunes/:tuneId")
+      .send({"genreId": "0", 'tuneId': "1"});
+      expect(res).toHaveProperty("statusCode", 200);
+      
+    
+    //expect(res).toHaveProperty("statusCode", 200);
   });
 });
